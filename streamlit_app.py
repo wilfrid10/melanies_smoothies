@@ -1,8 +1,9 @@
 # Import python packages
 import streamlit as st
 #from snowflake.snowpark.context import get_active_session
+from snowflake.snowpark.functions import col
 cnx = st.connection("snowflake")
-#session = get_active_session()
+session = cnx.session()
 helpful_links = [
     "https://docs.streamlit.io",
     "https://docs.snowflake.com/en/developer-guide/streamlit/about-streamlit",
@@ -26,7 +27,7 @@ st.write('The name of your smoothier will be',name_on_order)
 
 #st.write("You favorite fruit is:", option)
 
-from snowflake.snowpark.functions import col
+
 
 #ajouter les 25 fruits a ma liste à partir de la BD
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('fruit_name'))
@@ -59,4 +60,3 @@ if ingredients_list:
     if time_to_insert:
         session.sql(my_insert_stmt).collect()
         st.success('Your Smoothie is ordered!', icon="✅")
-session = cnx.session();
