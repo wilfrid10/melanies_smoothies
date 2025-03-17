@@ -2,7 +2,7 @@
 import streamlit as st
 #from snowflake.snowpark.context import get_active_session
 cnx = st.connection("snowflake")
-session = get_active_session()
+#session = get_active_session()
 helpful_links = [
     "https://docs.streamlit.io",
     "https://docs.snowflake.com/en/developer-guide/streamlit/about-streamlit",
