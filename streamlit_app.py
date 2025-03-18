@@ -34,7 +34,7 @@ st.write('The name of your smoothier will be',name_on_order)
 
 
 #ajouter les 25 fruits a ma liste à partir de la BD
-my_dataframe = session.table("smoothies.public.fruit_options").select(col('fruit_name'),col('SEARCH_ON'))
+my_dataframe = session.table("smoothies.public.fruit_options").select(col('fruit_name'),col('search_on'))
 #st.dataframe(data=my_dataframe,use_container_width=True)
 #st.stop()
 
@@ -49,8 +49,8 @@ ingredients_list = st.multiselect(
 )
 
 if ingredients_list:
-    st.write(ingredients_list)
-    st.text(ingredients_list)
+    #st.write(ingredients_list)
+    #st.text(ingredients_list)
 
     ingredients_string = ''
 
@@ -61,10 +61,10 @@ if ingredients_list:
         #sf_df = st.dataframe(data=smoothiefroot_response.json(),use_container_width=True)
 
         search_on=pd_df.loc[pd_df['FRUIT_NAME'] == fruit_chosen, 'SEARCH_ON'].iloc[0]
-        st.write('The search value for ', fruit_chosen,' is ', search_on, '.')
+        #st.write('The search value for ', fruit_chosen,' is ', search_on, '.')
         #st.write(ingredients_string)
         st.subheader(fruit_chosen + ' Nutrition Information')
-        fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" +fruit_chosen)
+        fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" +search_on)
         fv_df = st.dataframe(data=fruityvice_response.json(),use_container_width=True)
     #my_insert_stmt = """ insert into smoothies.public.orders(ingredients,name_on_order)
             #values ('""" + ingredients_string + """','""" +name_on_order+ """')"""
